@@ -24,8 +24,9 @@ data=load_data(10000)
 data_load_state.text("Loading Data done!!")
 
 
-st.subheader("Raw Data")
-st.write(data)
+if st.checkbox("show raw data"):
+	st.subheader("Raw Data")
+	st.write(data)
 
 st.subheader("Num Pickups per hour")
 hist_values=np.histogram(data[DATE_COLUMN].dt.hour, bins=24, range=(0,24))[0]
@@ -35,3 +36,4 @@ hour_to_filter=st.slider("hour", 0,23,17)
 filtered_data=data[data[DATE_COLUMN].dt.hour==hour_to_filter]
 st.subheader(f"Map of all pickups at {hour_to_filter}:00")
 st.map(filtered_data)
+
